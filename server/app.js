@@ -1,7 +1,8 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const mongoose = require('mongoose');
-const schema = require('../schema/schema');
+const schema = require('./schema/schema');
+const cors = require('cors');
 
 const app = express();
 const PORT = 3001;
@@ -12,6 +13,8 @@ mongoose.connect(
   `mongodb://${LOGIN}:${PASS}@ds213538.mlab.com:13538/graphql-pet`,
   { useNewUrlParser: true }
 );
+
+app.use(cors());
 
 app.use('/graphql', graphqlHTTP({
   schema,
